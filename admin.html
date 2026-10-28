@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Campaign Control Room</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px; }
+  .top h1 { font-size: 20px; font-weight: 800; }
+  .top h1 small { display: block; font-size: 12.5px; font-weight: 500; color: var(--ink-3); letter-spacing: 0; margin-top: 2px; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+  .gate { max-width: 420px; margin: 60px auto; padding: 24px; }
+  .gate h2 { font-size: 20px; margin-bottom: 6px; }
+  .gate form { display: grid; gap: 12px; margin-top: 16px; }
+
+  .grid { display: grid; gap: 16px; padding-bottom: 48px; }
+  .kpis { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 760px) { .kpis { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) { .kpis { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  .kpi { padding: 14px 16px; min-width: 0; }
+  .kpi .label { font-size: 12.5px; color: var(--ink-2); font-weight: 600; }
+  .kpi .value { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; margin: 4px 0 2px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .kpi .value small { font-size: 15px; font-weight: 600; color: var(--ink-3); letter-spacing: 0; }
+  .kpi .note { font-size: 12.5px; color: var(--ink-3); }
+  .kpi .bar { margin-top: 8px; height: 6px; }
+  .status { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+  .status.good { background: var(--good-bg); color: var(--good); }
+  .status.warn { background: var(--warn-bg); color: var(--warn); }
+
+  .row { display: grid; gap: 16px; }
+  @media (min-width: 980px) { .row.r21 { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); } .row.r11 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+  .panel { padding: 18px; min-width: 0; }
+  .panel-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .panel-head h2 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .panel-head p { font-size: 13px; color: var(--ink-3); }
+
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--ink-2); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .legend i.line { height: 2px; border-radius: 1px; }
+  .legend i.dash { height: 0; border-top: 2px dashed var(--plan); background: none !important; }
+
+  .chart { position: relative; width: 100%; }
+  .chart svg { display: block; width: 100%; overflow: visible; }
+  .chart text { fill: var(--ink-3); font-size: 11.5px; font-family: var(--font); }
+  .chart .gridline { stroke: var(--grid); stroke-width: 1; }
+  .chart .axis { stroke: var(--line); stroke-width: 1; }
+  .tip {
+    position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);
+    border-radius: 10px; padding: 8px 10px; font-size: 12.5px; min-width: 140px; opacity: 0; transition: opacity .1s; z-index: 5; white-space: nowrap;
+  }
+  .tip.show { opacity: 1; }
+  .tip b { display: block; font-size: 12px; color: var(--ink-3); font-weight: 600; margin-bottom: 4px; }
+  .tip div { display: flex; justify-content: space-between; gap: 14px; color: var(--ink); }
+  .tip div span:first-child { color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px; }
+  .tip i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  .hbars { display: grid; gap: 9px; }
+  .hbar { display: grid; grid-template-columns: 130px minmax(0, 1fr) 72px; gap: 10px; align-items: center; font-size: 13.5px; }
+  .hbar .t { height: 18px; background: var(--surface-2); border-radius: 0 4px 4px 0; }
+  .hbar .t i { display: block; height: 100%; background: var(--series-1); border-radius: 0 4px 4px 0; min-width: 2px; }
+  .hbar .v { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .hbar .v small { color: var(--ink-3); font-weight: 500; display: inline-block; min-width: 34px; margin-left: 4px; }
+  .hbar { grid-template-columns: 130px minmax(0, 1fr) 82px; }
+  .hbar .l { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink-2); }
+
+  .insights { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .insights li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; font-size: 14px; }
+  .insights .ic { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-size: 13px; background: var(--surface-2); }
+  .insights b { font-weight: 700; }
+
+  .tbl-wrap { overflow-x: auto; margin: 0 -6px; }
+  .tbl-wrap table { min-width: 560px; }
+  .tbl-wrap #recentTable { min-width: 0; }
+  td .sub { display: block; font-size: 12px; color: var(--ink-3); }
+  .tier { font-size: 12px; font-weight: 600; color: var(--accent); }
+  .chip { display: inline-block; font-size: 11.5px; font-weight: 600; padding: 2px 7px; border-radius: 6px; background: var(--surface-2); color: var(--ink-2); }
+  .chip.ref { background: var(--accent-2); color: var(--accent); }
+
+  .builder { display: grid; gap: 10px; grid-template-columns: 1fr; }
+  @media (min-width: 640px) { .builder { grid-template-columns: 180px 1fr auto; align-items: end; } }
+  .built { margin-top: 10px; display: flex; gap: 8px; }
+  .built .input { font-family: var(--mono); font-size: 12.5px; background: var(--surface-2); }
+  .tablelink { margin-top: 10px; font-size: 12.5px; }
+  details summary { cursor: pointer; color: var(--accent); font-weight: 600; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <div>
+    <h1>Campaign Control Room<small id="subtitle">Workshop registrations</small></h1>
+  </div>
+  <div class="actions">
+    <span class="pill demo hidden" id="demoPill">Demo data</span>
+    <span class="pill live hidden" id="livePill">Live</span>
+    <span class="faint" style="font-size:12.5px" id="updated"></span>
+    <button class="btn sm hidden" id="refreshBtn" type="button">Refresh</button>
+    <button class="btn sm hidden" id="csvBtn" type="button">Export CSV</button>
+    <a class="btn sm" href="index.html">Student page ↗</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card gate" id="gate">
+    <h2>Organiser sign-in</h2>
+    <p class="muted" style="font-size:14px" id="gateHint">Enter the admin key from the Apps Script logs.</p>
+    <form id="gateForm">
+      <label class="field" data-f="key"><span>Admin key</span><input class="input" name="key" type="password" autocomplete="current-password" required><div class="msg"></div></label>
+      <button class="btn primary" type="submit">Open dashboard</button>
+    </form>
+  </div>
+
+  <div class="grid hidden" id="dash">
+    <section class="kpis" id="kpis" aria-label="Key metrics"></section>
+
+    <div class="row r21">
+      <section class="card panel">
+        <div class="panel-head">
+          <h2>Registrations vs plan</h2>
+          <div class="legend"><span><i class="line" style="background:var(--series-1)"></i>Actual (cumulative)</span><span><i class="dash"></i>Plan</span><span><i class="line" style="background:var(--ink)"></i>Target</span></div>
+        </div>
+        <div class="chart" id="cumChart"></div>
+      </section>
+      <section class="card panel">
+        <div class="panel-head"><h2>What to do next</h2><p>Auto-generated from today's numbers</p></div>
+        <ul class="insights" id="insights"></ul>
+      </section>
+    </div>
+
+    <div class="row r11">
+      <section class="card panel">
+        <div class="panel-head">
+          <h2>New registrations per day</h2>
+          <div class="legend"><span><i style="background:var(--series-1)"></i>Organic</span><span><i style="background:var(--series-2)"></i>Referral</span></div>
+        </div>
+        <div class="chart" id="dayChart"></div>
+      </section>
+      <section class="card panel">
+        <div class="panel-head"><h2>Where registrations come from</h2><p>utm_source, or referral when a code was used</p></div>
+        <div class="hbars" id="channelBars"></div>
+      </section>
+    </div>
+
+    <div class="row r21">
+      <section class="card panel">
+        <div class="panel-head"><h2>Top ambassadors</h2><p>Nudge = WhatsApp message with their progress, ready to send</p></div>
+        <div class="tbl-wrap"><table id="ambTable"></table></div>
+        <details class="tablelink" id="ambMore"><summary>Show all ambassadors</summary></details>
+      </section>
+      <section class="card panel">
+        <div class="panel-head"><h2>Audience quality</h2><p>Are we reaching who we planned to?</p></div>
+        <div class="section-label" style="margin:0 0 8px;font-size:11.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em">Graduating year</div>
+        <div class="hbars" id="yearBars"></div>
+        <div class="section-label" style="margin:18px 0 8px;font-size:11.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em">Branch</div>
+        <div class="hbars" id="branchBars"></div>
+      </section>
+    </div>
+
+    <div class="row r11">
+      <section class="card panel">
+        <div class="panel-head"><h2>Colleges</h2><p id="collegeNote"></p></div>
+        <div class="hbars" id="collegeBars"></div>
+      </section>
+      <section class="card panel">
+        <div class="panel-head"><h2>Latest registrations</h2></div>
+        <div class="tbl-wrap"><table id="recentTable"></table></div>
+      </section>
+    </div>
+
+    <section class="card panel">
+      <div class="panel-head"><h2>Tracked link builder</h2><p>One link per WhatsApp group, club or post, so every channel above is measurable</p></div>
+      <form class="builder" id="builder">
+        <label class="field"><span>Channel</span><select class="input" name="source" id="srcSelect"></select></label>
+        <label class="field"><span>Label (group, club, college)</span><input class="input" name="campaign" placeholder="cbit-cse-2027-group"></label>
+        <button class="btn primary" type="submit">Build link</button>
+      </form>
+      <div class="built hidden" id="built"><input class="input" id="builtLink" readonly aria-label="Tracked link"><button class="btn" type="button" id="copyBuilt">Copy</button></div>
+    </section>
+  </div>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="config.js"></script>
+<script src="core.js"></script>
+<script src="api.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

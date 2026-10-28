@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Project Workshop</title>
+<meta name="description" content="Free live workshop for final-year engineering students: build your first AI project in 60 minutes.">
+<meta property="og:title" content="Build Your First AI Project in 60 Minutes: free live workshop">
+<meta property="og:description" content="Leave with a working, GitHub-ready AI project before placement season. Free for final-year engineering students.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 18px; padding-bottom: 18px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: -0.01em; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 9px; background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; font-size: 15px; }
+  .brand small { display: block; font-weight: 500; font-size: 12px; color: var(--ink-3); letter-spacing: 0; }
+  .top-right { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+
+  .hero { display: grid; gap: 28px 48px; grid-template-columns: 1fr; grid-template-areas: "pitch" "panel" "more"; padding-top: 12px; padding-bottom: 40px; }
+  @media (min-width: 900px) {
+    .hero { grid-template-columns: minmax(0, 1fr) 420px; grid-template-areas: "pitch panel" "more panel"; padding-top: 36px; }
+    .panel { position: sticky; top: 20px; align-self: start; }
+  }
+  .pitch { grid-area: pitch; }
+  .panel { grid-area: panel; padding: 22px; }
+  .more { grid-area: more; }
+
+  .eyebrow { display: inline-flex; gap: 8px; align-items: center; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); background: var(--accent-2); padding: 6px 10px; border-radius: 8px; }
+  h1 { font-size: clamp(34px, 6vw, 56px); font-weight: 800; margin: 16px 0 14px; letter-spacing: -0.035em; }
+  h1 em { font-style: normal; color: var(--accent); }
+  .sub { font-size: 17.5px; color: var(--ink-2); max-width: 560px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .meta .pill { background: var(--surface); border: 1px solid var(--line); font-size: 13px; padding: 6px 11px; color: var(--ink); }
+
+  .proof { margin-top: 26px; padding: 16px 18px; max-width: 560px; }
+  .proof-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+  .proof-count { font-size: 15px; }
+  .proof-count b { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .ticker { margin-top: 10px; font-size: 13.5px; color: var(--ink-2); min-height: 21px; transition: opacity .3s ease; }
+  .ticker b { color: var(--ink); font-weight: 600; }
+
+  .countdown { display: flex; gap: 8px; margin-top: 4px; }
+  .countdown div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; min-width: 62px; text-align: center; }
+  .countdown b { display: block; font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .countdown span { font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .06em; }
+
+  .gets { display: grid; gap: 12px; margin-top: 8px; }
+  @media (min-width: 640px) { .gets { grid-template-columns: repeat(3, 1fr); } }
+  .get { padding: 16px; }
+  .get .ico { width: 34px; height: 34px; border-radius: 10px; background: var(--accent-2); color: var(--accent); display: grid; place-items: center; margin-bottom: 10px; }
+  .get .ico svg { width: 18px; height: 18px; }
+  .get h3 { font-size: 15.5px; margin-bottom: 4px; }
+  .get p { font-size: 14px; color: var(--ink-2); }
+  .section-label { font-size: 12.5px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; letter-spacing: .06em; margin: 30px 0 10px; }
+
+  /* panel */
+  .panel h2 { font-size: 22px; margin-bottom: 4px; }
+  .invite { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 10px; background: var(--good-bg); color: var(--good); font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+  .invite .avatar { width: 30px; height: 30px; border-radius: 50%; background: var(--good); color: var(--good-bg); display: grid; place-items: center; font-weight: 800; flex: none; }
+  form { display: grid; gap: 14px; margin-top: 16px; }
+  .row2 { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; }
+  .phone { display: flex; }
+  .phone .cc { display: grid; place-items: center; padding: 0 10px; border: 1px solid var(--line); border-right: 0; border-radius: 10px 0 0 10px; background: var(--surface-2); color: var(--ink-2); font-weight: 600; font-size: 14px; }
+  .phone .input { border-radius: 0 10px 10px 0; }
+  .years { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .years label { position: relative; }
+  .years input { position: absolute; opacity: 0; pointer-events: none; }
+  .years span { display: block; text-align: center; padding: 9px 6px; border: 1px solid var(--line); border-radius: 10px; font-size: 13.5px; font-weight: 600; cursor: pointer; color: var(--ink-2); }
+  .years input:checked + span { border-color: var(--accent); background: var(--accent-2); color: var(--accent); }
+  .years input:focus-visible + span { box-shadow: 0 0 0 3px var(--accent-2); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .submit { width: 100%; padding: 13px; font-size: 16px; margin-top: 4px; }
+  .fine { font-size: 12.5px; color: var(--ink-3); text-align: center; }
+  .linkish { background: none; border: 0; padding: 0; color: var(--accent); font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
+
+  /* hub */
+  .done-badge { width: 44px; height: 44px; border-radius: 50%; background: var(--good-bg); color: var(--good); display: grid; place-items: center; margin-bottom: 12px; }
+  .done-badge svg { width: 24px; height: 24px; }
+  .linkbox { display: flex; gap: 8px; margin-top: 10px; }
+  .linkbox .input { font-family: var(--mono); font-size: 13px; background: var(--surface-2); }
+  .shares { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 10px; }
+  .shares .wa { grid-column: 1 / -1; padding: 12px; }
+  .stats3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
+  .stat { background: var(--surface-2); border-radius: 10px; padding: 10px; }
+  .stat b { display: block; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 12px; color: var(--ink-2); }
+  .ladder { margin-top: 18px; }
+  .ladder-track { position: relative; height: 8px; border-radius: 999px; background: var(--surface-2); margin: 26px 10px 0; }
+  .ladder-fill { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 999px; background: var(--accent); transition: width .6s ease; }
+  .ladder-stop { position: absolute; top: 50%; width: 22px; height: 22px; margin-left: -11px; margin-top: -11px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line); display: grid; place-items: center; font-size: 11px; font-weight: 800; color: var(--ink-3); }
+  .ladder-stop.hit { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .ladder-next { margin-top: 14px; font-size: 13.5px; color: var(--ink-2); }
+  .ladder-next b { color: var(--ink); }
+  .prize { margin-top: 14px; padding: 10px 12px; border-radius: 10px; border: 1px dashed var(--line); font-size: 13.5px; color: var(--ink-2); }
+  .prize b { color: var(--ink); }
+  .demo-box { margin-top: 14px; padding: 10px 12px; border-radius: 10px; background: var(--warn-bg); color: var(--warn); font-size: 13px; display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .demo-box .btn { border-color: transparent; }
+  .hub-foot { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 16px; font-size: 13px; }
+
+  /* boards */
+  .boards { padding-bottom: 56px; }
+  .boards-grid { display: grid; gap: 20px; }
+  @media (min-width: 900px) { .boards-grid { grid-template-columns: minmax(0, 1fr) 380px; } }
+  .board { padding: 20px; }
+  .board-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .board-head h2 { font-size: 20px; }
+  .lb { list-style: none; margin: 0; padding: 0; }
+  .lb li { display: grid; grid-template-columns: 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 2px; border-bottom: 1px solid var(--line); }
+  .lb li:last-child { border-bottom: 0; }
+  .lb .rk { width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-weight: 800; font-size: 13px; background: var(--surface-2); color: var(--ink-2); }
+  .lb li:nth-child(1) .rk { background: #f6c945; color: #4a3500; }
+  .lb li:nth-child(2) .rk { background: #d5d7dc; color: #2f3237; }
+  .lb li:nth-child(3) .rk { background: #e3a877; color: #4a2508; }
+  .lb .who { min-width: 0; }
+  .lb .who b { display: block; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lb .who span { display: block; font-size: 12.5px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lb .mini { height: 4px; border-radius: 4px; background: var(--surface-2); margin-top: 6px; }
+  .lb .mini i { display: block; height: 100%; border-radius: 4px; background: var(--accent); opacity: .75; }
+  .lb .n { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; }
+  .lb .n small { display: block; font-weight: 500; font-size: 11.5px; color: var(--ink-3); }
+  .empty { padding: 24px 4px; color: var(--ink-3); font-size: 14px; }
+  .rewards { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .rewards li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; }
+  .rewards .at { height: 44px; border-radius: 12px; background: var(--accent-2); color: var(--accent); display: grid; place-items: center; font-weight: 800; font-size: 15px; line-height: 1; text-align: center; }
+  .rewards .at small { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; }
+  .rewards b { display: block; font-size: 14.5px; }
+  .rewards span { font-size: 13px; color: var(--ink-2); }
+  footer { border-top: 1px solid var(--line); padding: 20px 0 32px; font-size: 13px; color: var(--ink-3); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">AI</div>
+    <div>60-Minute AI Workshop<small id="hostLine">Free · Live</small></div>
+  </div>
+  <div class="top-right">
+    <span class="pill live" id="livePill"><span class="tnum" id="topCount">–</span>&nbsp;registered</span>
+    <span class="pill demo hidden" id="demoPill" title="No backend connected: data lives in this browser only">Demo mode</span>
+  </div>
+</header>
+
+<main class="wrap hero">
+  <section class="pitch">
+    <span class="eyebrow">Free live workshop · For final-year engineers</span>
+    <h1 id="title">Build your first <em>AI project</em> in 60 minutes</h1>
+    <p class="sub">Placements are here and every interviewer asks <i>"what have you built?"</i> Come with a laptop. Leave with a working AI project on your GitHub and a solid line on your resume.</p>
+    <div class="meta" id="meta"></div>
+
+    <div class="card proof">
+      <div class="proof-row">
+        <div class="proof-count"><b class="tnum" id="regCount">–</b> <span class="muted">students from</span> <b class="tnum" id="colCount">–</b> <span class="muted">colleges</span></div>
+        <span class="faint tnum" id="seatsLeft"></span>
+      </div>
+      <div class="bar" role="progressbar" aria-label="Seats filled" id="seatBar"><i style="width:0"></i></div>
+      <div class="ticker" id="ticker" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <aside class="card panel" id="panel">
+    <!-- Registration -->
+    <div id="regView">
+      <div class="invite hidden" id="invite">
+        <div class="avatar" id="inviteAvatar"></div>
+        <div id="inviteText"></div>
+      </div>
+      <h2>Reserve your free seat</h2>
+      <p class="muted" style="font-size:14px">Takes 30 seconds. The joining link comes on WhatsApp.</p>
+      <form id="regForm" novalidate>
+        <label class="field" data-f="name"><span>Full name</span>
+          <input class="input" name="name" autocomplete="name" placeholder="Priya Sharma" required>
+          <div class="msg"></div></label>
+        <label class="field" data-f="email"><span>Email</span>
+          <input class="input" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@college.edu" required>
+          <div class="msg"></div></label>
+        <label class="field" data-f="phone"><span>WhatsApp number</span>
+          <div class="phone"><span class="cc">+91</span><input class="input" name="phone" type="tel" autocomplete="tel-national" inputmode="numeric" placeholder="98765 43210" maxlength="14" required></div>
+          <div class="msg"></div></label>
+        <label class="field" data-f="college"><span>College</span>
+          <input class="input" name="college" list="collegeList" autocomplete="organization" placeholder="Start typing your college" required>
+          <datalist id="collegeList"></datalist>
+          <div class="msg"></div></label>
+        <label class="field" data-f="branch"><span>Branch</span>
+          <select class="input" name="branch" required><option value="">Select branch</option></select>
+          <div class="msg"></div></label>
+        <div class="field" data-f="gradYear"><span style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink-2)">Graduating in</span>
+          <div class="years" id="years" role="radiogroup" aria-label="Graduation year"></div>
+          <div class="msg"></div></div>
+        <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button class="btn primary submit" type="submit" id="submitBtn">Reserve my free seat →</button>
+        <p class="fine">Already registered? <button type="button" class="linkish" id="showLookup">Get your invite link</button></p>
+      </form>
+
+      <form id="lookupForm" class="hidden" novalidate>
+        <p class="muted" style="font-size:14px">Enter the email and number you registered with.</p>
+        <label class="field" data-f="lemail"><span>Email</span><input class="input" name="email" type="email" autocomplete="email" required><div class="msg"></div></label>
+        <label class="field" data-f="lphone"><span>WhatsApp number</span><input class="input" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" required><div class="msg"></div></label>
+        <button class="btn primary submit" type="submit">Find my link</button>
+        <p class="fine"><button type="button" class="linkish" id="hideLookup">← Back to registration</button></p>
+      </form>
+    </div>
+
+    <!-- Referral hub, shown after registering -->
+    <div id="hubView" class="hidden">
+      <div class="done-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h2 id="hubTitle">You're in!</h2>
+      <p class="muted" style="font-size:14px" id="hubSub"></p>
+      <a class="btn sm" id="calBtn" target="_blank" rel="noopener" style="margin-top:10px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>Add to Google Calendar</a>
+
+      <div class="section-label" style="margin-top:22px">Bring your friends · unlock rewards</div>
+      <div class="linkbox">
+        <input class="input" id="myLink" readonly aria-label="Your invite link">
+        <button class="btn" id="copyBtn" type="button" aria-label="Copy link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button>
+      </div>
+      <div class="shares">
+        <a class="btn wa" id="waBtn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.6 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.2Z"/></svg>
+          Share on WhatsApp</a>
+        <button class="btn" id="storyBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></svg>Status card</button>
+        <a class="btn" id="liBtn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5Zm7 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4V9.5Z"/></svg>LinkedIn</a>
+        <a class="btn" id="tgBtn" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.7 19.4c-.2 1-.9 1.3-1.7.8l-4.8-3.6-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2L6.5 13 1.8 11.5c-1-.3-1-1 .2-1.5L20.6 3c.8-.3 1.6.2 1.3 1.3Z"/></svg>Telegram</a>
+        <button class="btn hidden" id="nativeShare" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v14"/></svg>More</button>
+      </div>
+
+      <div class="stats3">
+        <div class="stat"><b id="sRefs">0</b><span>friends joined</span></div>
+        <div class="stat"><b id="sRank">–</b><span>your rank</span></div>
+        <div class="stat"><b id="sNext">3</b><span id="sNextLabel">to next reward</span></div>
+      </div>
+
+      <div class="ladder">
+        <div class="ladder-track" id="ladderTrack"><div class="ladder-fill" id="ladderFill"></div></div>
+        <div class="ladder-next" id="ladderNext"></div>
+      </div>
+      <div class="prize" id="prizeLine"></div>
+
+      <div class="demo-box hidden" id="demoBox">
+        <span>Demo: see the loop work</span>
+        <button class="btn sm" id="simBtn" type="button">+ Simulate a friend joining</button>
+      </div>
+
+      <div class="hub-foot">
+        <span class="faint">Your code: <b class="mono" id="myCode" style="color:var(--ink)"></b></span>
+        <button class="linkish" id="switchUser" type="button">Not you? Register someone else</button>
+      </div>
+    </div>
+  </aside>
+
+  <section class="more">
+    <div class="section-label">What you'll walk away with</div>
+    <div class="gets">
+      <div class="card get">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></div>
+        <h3>A working AI project</h3><p>Built live, step by step. No prior AI experience needed.</p>
+      </div>
+      <div class="card get">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-4 1.5-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></div>
+        <h3>On your GitHub</h3><p>Pushed to your repo with a clean README recruiters can open.</p>
+      </div>
+      <div class="card get">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
+        <h3>A resume line</h3><p>We'll help you word it so it holds up in an interview.</p>
+      </div>
+    </div>
+    <div class="section-label">Starts in</div>
+    <div class="countdown" id="countdown" aria-live="off"></div>
+  </section>
+</main>
+
+<section class="wrap boards" id="boards">
+  <div class="boards-grid">
+    <div class="card board">
+      <div class="board-head">
+        <h2>Leaderboard</h2>
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" data-tab="people">Top ambassadors</button>
+          <button role="tab" aria-selected="false" data-tab="colleges">College battle</button>
+        </div>
+      </div>
+      <ol class="lb" id="lb"></ol>
+    </div>
+    <div class="card board">
+      <div class="board-head"><h2>Rewards</h2></div>
+      <ul class="rewards" id="rewardList"></ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span id="footHost"></span>
+    <span><a href="admin.html">Organiser dashboard</a></span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="config.js"></script>
+<script src="core.js"></script>
+<script src="api.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
