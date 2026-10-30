@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Growth Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 11mm 13mm 10mm; }
+  :root { --ink:#141413; --ink-2:#4a4945; --ink-3:#85837c; --line:#e3e0d7; --soft:#f4f2ec; --accent:#4338ca; --accent-2:#eef0ff; --good:#0a7d0a; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; font: 9.1pt/1.36 'Plus Jakarta Sans', system-ui, sans-serif; color: var(--ink); background: #fff; }
+  .page { break-after: page; }
+  .page:last-child { break-after: auto; }
+  h1 { font-size: 21pt; line-height: 1.1; letter-spacing: -0.02em; margin: 3px 0 5px; }
+  h2 { font-size: 10.6pt; margin: 10px 0 4px; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 7px; }
+  h2 .n { color: var(--accent); font-size: 9pt; font-weight: 800; }
+  p { margin: 0 0 5px; }
+  ul { margin: 0; padding-left: 15px; }
+  li { margin: 0 0 3px; }
+  b { font-weight: 700; }
+  a { color: var(--accent); text-decoration: none; }
+  .eyebrow { font-size: 8pt; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  .meta { color: var(--ink-2); font-size: 9pt; }
+  .meta span + span::before { content: " · "; color: var(--ink-3); }
+  .bet { background: var(--accent-2); border-radius: 8px; padding: 8px 12px; margin-top: 8px; }
+  .bet p:last-child { margin: 0; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 8.7pt; }
+  th { text-align: left; font-size: 7.8pt; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-3); font-weight: 700; padding: 4px 6px; border-bottom: 1.5px solid var(--ink); }
+  td { padding: 3.5px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.total td { border-bottom: none; border-top: 1.5px solid var(--ink); font-weight: 800; }
+  td .sub { display: block; color: var(--ink-3); font-size: 8pt; }
+  .note { color: var(--ink-2); font-size: 8.6pt; margin-top: 5px; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+  .kpi { border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; }
+  .kpi b { display: block; font-size: 15pt; letter-spacing: -0.02em; line-height: 1.1; }
+  .kpi span { color: var(--ink-2); font-size: 8.2pt; }
+  .day td:first-child { white-space: nowrap; font-weight: 700; }
+  .asset { border: 1.5px solid var(--accent); border-radius: 8px; padding: 9px 12px; margin-top: 12px; }
+  .asset .links { font-weight: 700; margin: 2px 0 5px; }
+  .foot { margin-top: 8px; color: var(--ink-3); font-size: 8pt; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="eyebrow">NxtWave Growth Intern challenge · Growth plan</div>
+  <h1>500 final-year registrations in 7 days, on ₹2,000</h1>
+  <div class="meta"><span>Workshop: <b>Build Your First AI Project in 60 Minutes</b></span><span>Free, live online, Sun 8 Nov, 11 AM IST</span><span>Campaign 1–7 Nov</span><span>Akilan</span></div>
+
+  <div class="bet">
+    <p><b>The bet: ₹2,000 can't buy 500 students' attention, but it can pay them to bring their friends.</b></p>
+    <ul>
+      <li>At an estimated ₹40–80 per student lead on paid social, ₹2,000 buys about 25–50 registrations, which is 5–10% of the goal.</li>
+      <li>Final-year students already sit in free, dense distribution: batch WhatsApp groups, clubs and placement cells. Access is free; what's missing is a reason to share.</li>
+      <li>So every registrant gets a personal invite link. The whole ₹2,000 becomes prizes for the top 3 referrers, paid only on results.</li>
+    </ul>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi"><b>520</b><span>planned registrations (4% buffer)</span></div>
+    <div class="kpi"><b>3</b><span>channels: champions, partners, referral loop</span></div>
+    <div class="kpi"><b>₹4</b><span>cost per registration at 500</span></div>
+    <div class="kpi"><b>≥ 80%</b><span>final-year (2027 batch) share</span></div>
+  </div>
+
+  <h2><span class="n">01</span>Who we're targeting and what we promise</h2>
+  <div class="two">
+    <div>
+      <p><b>Who:</b> 2027-batch B.E./B.Tech students in tier-2 and tier-3 colleges. All branches can join; CSE, IT and AI&amp;DS come first.</p>
+      <p><b>Why now:</b> November is placement season. Their most common gap is "I have no real project to talk about in interviews."</p>
+    </div>
+    <div>
+      <p><b>Promise:</b> "Leave with a working AI project on your GitHub in 60 minutes, before your next interview." The pitch is the outcome, not "learn AI".</p>
+      <p><b>Timing:</b> Sunday 11 AM, when there are no classes, labs or placement drives.</p>
+    </div>
+  </div>
+
+  <h2><span class="n">02</span>The math: three channels to 520</h2>
+  <table>
+    <thead><tr><th>Channel</th><th>How it runs</th><th class="num">Reach</th><th class="num">Conv.</th><th class="num">Regs</th></tr></thead>
+    <tbody>
+      <tr><td><b>A. Student champions</b><span class="sub">batch WhatsApp groups</span></td><td>25 champions at 25 colleges each post in their final-year group, every group with its own tracked link</td><td class="num">25 × 240 = 6,000</td><td class="num">4%</td><td class="num">240</td></tr>
+      <tr><td><b>B. Partners</b><span class="sub">clubs, placement cells, LinkedIn</span></td><td>12 partners (GDSC, IEEE, CSI, coding clubs, TPOs) post once through their official channel</td><td class="num">12 × 250 = 3,000</td><td class="num">3%</td><td class="num">90</td></tr>
+      <tr><td><b>C. Referral loop</b><span class="sub">every registrant</span></td><td>25% of registrants share, and each sharer brings 1.5 friends, so k ≈ 0.37. Total = 330 ÷ (1 − 0.37)</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">+190</td></tr>
+      <tr class="total"><td colspan="4">Total (target 500, so a 4% buffer)</td><td class="num">520</td></tr>
+    </tbody>
+  </table>
+  <p class="note"><b>Sensitivity:</b> if the loop only reaches k = 0.2, the total falls to about 410. The trigger is pace below 80% of plan by Day 3. The response is to recruit 8 more champions (about +80 seed registrations, plus their referrals). Each champion is worth about 10 seed registrations, so champions are the lever to pull first.</p>
+
+  <h2><span class="n">03</span>Budget: ₹2,000, paid only on results</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Why</th><th class="num">Cost</th></tr></thead>
+    <tbody>
+      <tr><td><b>Top-3 referrer prizes</b><span class="sub">₹1,000 / ₹600 / ₹400</span></td><td>A visible prize race keeps the leaderboard moving all week. We only pay if referrals happen.</td><td class="num">₹2,000</td></tr>
+      <tr><td><b>Milestone rewards</b><span class="sub">at 3 / 5 / 10 friends</span></td><td>AI Starter Kit, then a Campus AI Ambassador certificate (for LinkedIn), then a live shout-out with priority Q&amp;A. All digital, so each extra reward costs nothing.</td><td class="num">₹0</td></tr>
+      <tr><td><b>Tools</b></td><td>GitHub Pages hosting plus a Google Sheet backend through Apps Script.</td><td class="num">₹0</td></tr>
+    </tbody>
+  </table>
+  <p class="note"><b>Payout rule:</b> a referral only counts toward the prizes if the friend is final-year and attends the workshop. This makes fake sign-ups worthless. <b>Considered and dropped:</b> paid ads (about 25–50 registrations) and one micro-influencer post (a one-day spike that we can't attribute to final-year students).</p>
+</section>
+
+<section class="page">
+  <h2 style="margin-top:0"><span class="n">04</span>7-day calendar</h2>
+  <table>
+    <thead><tr><th>Day</th><th class="num">Plan</th><th>Actions</th></tr></thead>
+    <tbody>
+      <tr class="day"><td>Fri 30–Sat 31 Oct<span class="sub">prep</span></td><td class="num">0</td><td>Recruit 25 champions through college contacts, LinkedIn and the NxtWave community. Line up the 12 partners. Build one tracked link per group in the dashboard. Switch the backend live.</td></tr>
+      <tr class="day"><td>D1 · Sun 1 Nov</td><td class="num">90</td><td>Champions post in their batch groups in the evening, which is likely the peak reading time. The leaderboard and prize race open.</td></tr>
+      <tr class="day"><td>D2 · Mon 2</td><td class="num">85</td><td>Partner posts go out from clubs and placement cells, plus a LinkedIn post from the host. Push the WhatsApp Status card to everyone who registered on D1.</td></tr>
+      <tr class="day"><td>D3 · Tue 3</td><td class="num">70</td><td>First leaderboard post and college-vs-college callout. Nudge the top 20 ambassadors with their progress. <b>Checkpoint:</b> pace and referral share.</td></tr>
+      <tr class="day"><td>D4 · Wed 4</td><td class="num">60</td><td>Mid-week dip. Tell everyone at 1–2 referrals: "1 more friend unlocks the Starter Kit." Read the first test results (see form).</td></tr>
+      <tr class="day"><td>D5 · Thu 5</td><td class="num">60</td><td>Put effort into the 3 best channels on the dashboard and drop the weakest. Second post only in groups converting at 4% or more.</td></tr>
+      <tr class="day"><td>D6 · Fri 6</td><td class="num">65</td><td>"48 hours left in the prize race" leaderboard post. Top colleges race each other.</td></tr>
+      <tr class="day"><td>D7 · Sat 7</td><td class="num">90</td><td>Deadline surge: "seats closing" message, final nudges. The prize race closes at 11:59 PM.</td></tr>
+      <tr class="day"><td>Sun 8 Nov<span class="sub">workshop</span></td><td class="num">n/a</td><td>WhatsApp reminders at 9:00 and 10:45 AM. Prizes are announced live, which gives people a reason to show up and not just register.</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="n">05</span>Metrics and decision rules</h2>
+  <table>
+    <thead><tr><th>Metric</th><th>Target</th><th>If off track</th></tr></thead>
+    <tbody>
+      <tr><td><b>Registrations vs daily plan</b></td><td>≥ 90%</td><td>Below 80% two days running: add 8 champions or groups (about +80)</td></tr>
+      <tr><td><b>Referral share</b> of registrations</td><td>≥ 30% by D3</td><td>Below 20%: nudge sharers, push the Status card, show the next milestone more prominently</td></tr>
+      <tr><td><b>Final-year share</b></td><td>≥ 80%</td><td>Below 70%: move effort from LinkedIn and clubs to batch groups</td></tr>
+      <tr><td><b>Group conversion</b> (registrations ÷ members)</td><td>≥ 4%</td><td>Below 2% after 24 h: switch the message angle (Test 1)</td></tr>
+      <tr><td><b>Show-up rate</b> on Sunday</td><td>≥ 40%</td><td>Add-to-calendar at sign-up, plus reminders on D7 and the morning of the workshop</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="n">06</span>Risks</h2>
+  <ul>
+    <li><b>Fake or self referrals:</b> the system blocks self-referrals and duplicate emails or phones, and only shows masked names. The payout rule (final-year and attended) removes the incentive to cheat.</li>
+    <li><b>Group fatigue or admins removing posts:</b> one post per group, made by a member of that group rather than an outsider. Second posts only go to groups that convert.</li>
+    <li><b>Registrations that never show up:</b> calendar invite, two reminders, and prizes revealed live.</li>
+  </ul>
+
+  <div class="asset">
+    <div class="eyebrow">Working asset: the referral engine that runs this plan</div>
+    <div class="links"><a href="https://akilan-j.github.io/ai-workshop-referral-engine/?ref=PRANADKU">akilan-j.github.io/ai-workshop-referral-engine</a> · <a href="https://akilan-j.github.io/ai-workshop-referral-engine/admin.html">/admin.html</a> (dashboard)</div>
+    <ul>
+      <li><b>Student page:</b> 30-second registration, a personal invite link, one-tap WhatsApp share, a personalised WhatsApp Status card with a QR code, rewards at 3, 5 and 10 friends, leaderboards for ambassadors and for colleges, and add-to-calendar.</li>
+      <li><b>Organiser dashboard:</b> pace vs this plan and a projected finish, attribution by channel and by group, final-year share, auto-generated "what to do next" actions, one-tap WhatsApp nudges to ambassadors, a tracked-link builder, and CSV export.</li>
+    </ul>
+  </div>
+  <p class="foot">Reach and conversion figures are planning estimates. Two numbers get replaced with real ones first: the D1 group conversion and the D3 referral share.</p>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Worklog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .doc { max-width: 820px; padding-top: 36px; padding-bottom: 56px; }
+  .doc header h1 { font-size: clamp(26px, 5vw, 34px); font-weight: 800; margin: 6px 0 8px; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+  .lede { color: var(--ink-2); font-size: 16px; max-width: 64ch; }
+  .links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .ex { margin-top: 22px; padding: 20px; }
+  .ex h2 { font-size: 19px; font-weight: 800; display: flex; gap: 10px; align-items: baseline; }
+  .ex h2 .n { color: var(--accent); font-family: var(--mono); font-size: 14px; }
+  .steps { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 0; }
+  .steps > li { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 14px; padding: 11px 0; border-top: 1px solid var(--line); }
+  .steps > li:first-child { border-top: 0; padding-top: 0; }
+  .steps .k { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); padding-top: 2px; }
+  .steps .k.chg { color: var(--accent); }
+  .steps .v { min-width: 0; }
+  .steps .v p + p, .steps .v p + ul, .steps .v ul + p { margin-top: 6px; }
+  .steps ul { margin: 0; padding-left: 18px; }
+  .steps ul li { margin: 2px 0; }
+  .quote { font-family: var(--mono); font-size: 13.5px; background: var(--surface-2); border-radius: 8px; padding: 8px 10px; display: block; overflow-wrap: anywhere; }
+  .rej { margin-top: 22px; padding: 20px; border-left: 4px solid var(--accent); }
+  .rej h2 { font-size: 19px; font-weight: 800; margin-bottom: 8px; }
+  .rej p + p { margin-top: 8px; }
+  footer { margin-top: 28px; color: var(--ink-3); font-size: 13px; }
+  @media (max-width: 560px) {
+    .steps > li { grid-template-columns: 1fr; gap: 4px; }
+    .ex, .rej { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+<main class="wrap doc">
+  <header>
+    <div class="eyebrow">NxtWave Growth Intern challenge · AI worklog</div>
+    <h1>How AI was used, and where its output was changed</h1>
+    <p class="lede">I built this with Claude as a coding and planning partner. Below are three decisions where the first AI output was not the final one. Each follows the same format: prompt, AI output, what was changed or rejected, and the final result.</p>
+    <div class="links">
+      <a class="btn sm" href="./?ref=PRANADKU">Working asset ↗</a>
+      <a class="btn sm" href="growth-plan.pdf">Growth plan (PDF) ↗</a>
+      <a class="btn sm" href="https://github.com/Akilan-J/ai-workshop-referral-engine">Code ↗</a>
+    </div>
+  </header>
+
+  <section class="card ex">
+    <h2><span class="n">01</span>The funnel math</h2>
+    <ol class="steps">
+      <li><div class="k">Prompt</div><div class="v"><span class="quote">[Challenge PDF] Plan how to get 500 final-year students to register in 7 days on ₹2,000.</span></div></li>
+      <li><div class="k">AI output</div><div class="v"><p>A referral system instead of the landing page everyone else would build. The funnel math was one channel: <b>40 WhatsApp groups × 250 members × 5% ≈ 500</b>.</p></div></li>
+      <li><div class="k chg">Changed</div><div class="v">
+        <p>I kept the referral idea and rejected the math:</p>
+        <ul>
+          <li>It needed 40 groups to all convert at 5%, with no buffer.</li>
+          <li>It ignored the referral loop the asset was built for.</li>
+          <li>It had nothing to say about what to do if Day 2 falls behind.</li>
+        </ul>
+      </div></li>
+      <li><div class="k">Final</div><div class="v">
+        <p><b>Two seed channels plus a loop:</b></p>
+        <ul>
+          <li>25 student champions × 240 × 4% = 240</li>
+          <li>12 club and placement-cell partners × 250 × 3% = 90</li>
+          <li>A referral loop at k ≈ 0.37, adding 190</li>
+        </ul>
+        <p>Total 520, a 4% buffer. The plan includes a sensitivity check: at k = 0.2 the total is about 410, so recruit 8 more champions. The dashboard tracks pace against this exact daily plan.</p>
+      </div></li>
+    </ol>
+  </section>
+
+  <section class="card ex">
+    <h2><span class="n">02</span>Where the asset runs</h2>
+    <ol class="steps">
+      <li><div class="k">Prompt</div><div class="v"><span class="quote">Start building it.</span></div></li>
+      <li><div class="k">AI output</div><div class="v"><p>The fastest route was to ship it as a Claude Artifact: hosted in one step, with no deployment.</p></div></li>
+      <li><div class="k chg">Rejected</div><div class="v"><p>Opening an Artifact requires a claude.ai account, and students don't have one. A growth asset with a login wall loses most visitors before the form.</p></div></li>
+      <li><div class="k">Final</div><div class="v"><p>A static site on GitHub Pages with a Google Sheet as the database, reached through an Apps Script API. It's free, needs no login, and the team can read registrations in a normal spreadsheet.</p><p>One logic file runs in the browser, on the backend and in 12 automated tests.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="card ex">
+    <h2><span class="n">03</span>Demo vs real data</h2>
+    <ol class="steps">
+      <li><div class="k">Prompt</div><div class="v"><span class="quote">Is there a centralised DB?</span></div></li>
+      <li><div class="k">AI output</div><div class="v"><p>Not yet. The live site was running in demo mode: about 240 made-up registrations created in each visitor's own browser. Two students on two phones would never see each other.</p></div></li>
+      <li><div class="k chg">Changed</div><div class="v"><p>The site looked complete, but questioning it showed it couldn't run a real campaign as deployed. Demo data is right for reviewers, who can try every feature without polluting real numbers. It's wrong for launch day.</p></div></li>
+      <li><div class="k">Final</div><div class="v"><p>Demo mode stays on the public reviewer link. The Google Sheet backend is ready and tested against a simulated Sheet. Going live means setting one line in <code>config.js</code> (<code>API_URL</code>), and that is in the plan's prep day.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="card rej">
+    <h2>What AI suggested that I deliberately rejected</h2>
+    <p><b>The first demo leaderboard.</b> The AI generated sample data where one ambassador had 25 referrals and everyone else had a handful.</p>
+    <p>I rejected it because a leaderboard nobody can catch kills the referral race it's supposed to drive. A student who sees #1 at 25 and themselves at 0 doesn't start sharing. It also looked fake to a reviewer.</p>
+    <p>The data was rebalanced so #1 is around 16 and the reward milestones (3, 5, 10) look reachable. That is the experience real students need on Day 1.</p>
+  </section>
+
+  <footer>Built with Claude (Anthropic) as the AI pair. Every decision above was reviewed before it shipped.</footer>
+</main>
+</body>
+</html>
